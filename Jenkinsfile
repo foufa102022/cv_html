@@ -1,5 +1,6 @@
 pipeline {
-    
+    agent any
+
     environment {
         DOCKER_IMAGE = 'my-img-cv'
         DOCKER_CONTAINER_NAME = 'my-cv'
@@ -26,5 +27,6 @@ pipeline {
         }
     }
 
-   
+  
+    }
 }
