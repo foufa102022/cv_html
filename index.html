@@ -6,22 +6,420 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>cv Iftikhar</title>
+    <!-- Inclure la bibliothèque html2pdf -->
+    <script src="https://pdfcrowd.com/static/js/pdfcrowd.js"></script>
 
-    <!-- Autres balises meta -->
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js"></script>
+    <style type="text/CSS">
+        @import url(https://fonts.googleapis.com/css?family=Varela+Round);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+:root {
+    --profile-bg: #fff;
+    --skills-bg: #3d3e42;
+    --profile-color: #9099a0;
+    --skills-color: #9099a0;
+    --link-color: #66cc99;
+    --bold-color: #4a4e51;
+    --time: 0.6s;
+}
+
+*,
+*::after,
+*::before {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.5em;
+}
+
+a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.clearfix::after,
+.clearfix::before {
+    content: " ";
+    display: table;
+}
+
+.clearfix::after {
+    clear: both;
+}
+
+.bold {
+    color: var(--bold-color);
+    font-weight: 400;
+}
+
+.resume-wrapper {
+    position: relative;
+    text-align: center;
+    height: 100%;
+}
+
+.container {
+    min-height: 600px;
+}
+
+.profile {
+    background: var(--profile-bg);
+    width: 40%;
+    float: left;
+    color: var(--profile-color);
+    .name-wrapper {
+        float: left;
+        width: 60%;
+    }
+    h1 {
+        font-size: 2.5em;
+        text-align: left;
+        font-family: 'Varela Round', sans-serif;
+        color: var(--bold-color);
+        text-transform: uppercase;
+        line-height: 1em;
+        padding-top: 40px;
+    }
+    li {
+        margin-bottom: 10px;
+    }
+    .picture-resume-wrapper {
+        width: 40%;
+        display: block;
+        float: left;
+    }
+    .picture-resume {
+        width: 220px;
+        height: 220px;
+        background-size: cover;
+        border-radius: 50%;
+        margin-right: 0px;
+        display: table;
+        position: relative;
+        vertical-align: middle;
+        span {
+            display: table-cell;
+            vertical-align: middle;
+            position: relative;
+            margin: 0 auto;
+            z-index: 10;
+            text-align: center
+        }
+        img {
+            border-radius: 50%; 
+            width: 200px;
+        }
+    }
+    .contact-info {
+        margin-top: 100px;
+        font-weight: 300;
+    }
+    .list-titles {
+        float: left;
+        text-align: left;
+        font-weight: 600;
+        width: 40%;
+        color: var(--bold-color);
+    }
+    .list-content {
+        float: left;
+        width: 60%;
+        text-align: left;
+        font-weight: 300;
+    }
+    .contact-presentation {
+        text-align: left;
+        font-weight: 300;
+        margin-top: 100px;
+        margin-bottom: 100px;
+    }
+    svg {
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .st0,
+    .st1 {
+        fill: #66cc99;
+    }
+}
+
+.experience {
+    background: var(--skills-bg);
+    width: 60%;
+    float: left;
+    position: relative;
+    color: var(--skills-color);
+    font-weight: 300;
+    min-height: 100%;
+    min-height: 100vh;
+    h3.experience-title {
+        color: var(--link-color);
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+    .company-wrapper {
+        width: 30%;
+        float: left;
+        text-align: left;
+        padding-right: 5%;
+        margin-bottom: 60px;
+    }
+    .job-wrapper {
+        width: 70%;
+        float: left;
+        text-align: left;
+        padding-right: 5%;
+        margin-bottom: 60px;
+    }
+    .experience-title {
+        color: white;
+        margin-bottom: 15px;
+    }
+}
+
+.section-padding {
+    padding: 60px 60px 40px 40px;
+}
+
+.section-wrapper {
+    width: 50%;
+    float: left;
+    text-align: left;
+    color: var(--skills-color);
+    font-weight: 300;
+    margin-bottom: 20px;
+    &:nth-child(3) {
+        padding-right: 8%;
+    }
+    h3.section-title {
+        color: var(--link-color);
+        text-align: left;
+        text-transform: uppercase;
+        font-size: 1.2em;
+        margin-bottom: 20px;
+        font-weight: 400;
+    }
+    .skill-percentage {
+        margin-bottom: 10px;
+        position: relative;
+        &::after {
+            content: "";
+            width: 100%;
+            height: 6px;
+            background: var(--bold-color);
+            display: block;
+            margin-top: 3px;
+        }
+        &::before {
+            content: "";
+            height: 6px;
+            background: var(--link-color);
+            position: absolute;
+            margin-top: 3px;
+            bottom: 0;
+        }
+        &:nth-child(1)::before {
+            width: 80%;
+            animation: skill_1 var(--time) ease;
+        }
+        &:nth-child(2)::before {
+            width: 90%;
+            animation: skill_2 var(--time) ease;
+        }
+        &:nth-child(3)::before {
+            width: 90%;
+            animation: skill_3 var(--time) ease;
+        }
+        &:nth-child(4)::before {
+            width: 60%;
+            animation: skill_4 var(--time) ease;
+        }
+        &:nth-child(5)::before {
+            width: 70%;
+            animation: skill_5 var(--time) ease;
+        }
+        &:nth-child(6)::before {
+            width: 70%;
+            animation: skill_6 var(--time) ease;
+        }
+        &:nth-child(7)::before {
+            width: 70%;
+            animation: skill_6 var(--time) ease;
+        }
+    }
+}
+
+@keyframes skill_1 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 80%;
+    }
+}
+
+@keyframes skill_2 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 90%;
+    }
+}
+
+@keyframes skill_3 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 90%;
+    }
+}
+
+@keyframes skill_4 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 60%;
+    }
+}
+
+@keyframes skill_5 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 70%;
+    }
+}
+
+@keyframes skill_6 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 70%;
+    }
+}
+
+@keyframes skill_7 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 70%;
+    }
+}
+@keyframes skill_8 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 70%;
+    }
+}
+@keyframes skill_9 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 70%;
+    }
+}
+@keyframes skill_10 {
+    from {
+        width: 0%;
+    }
+    to {
+        width: 50%;
+    }
+}
 
 
+.button{
+  position: relative;
+  background-color: black;
+  border-radius: 4em;
+  font-size: 16px;
+  color: white;
+  padding: 0.8em 1.8em;
+  cursor:pointer;
+  user-select:none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition-duration: 0.4s;
+  -webkit-transition-duration: 0.4s; /* Safari */
+}
+
+.button:hover {
+  transition-duration: 0.1s;
+  background-color: hwb(131 0% 1%);
+}
+
+.button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 0.5s;
+  box-shadow: 0 0 10px 40px white;
+}
+
+.button:active:after {
+  box-shadow: 0 0 0 0 white;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  opacity: 1;
+  transition: 0s;
+}
+
+.button:active {
+  top: 1px;
+}
+
+   </style>
 </head>
 
 <body>
+    <!-- Collez ici le contenu de votre fichier HTML -->
+    <script>
+        document.getElementById('download').addEventListener('click', function () {
+            // Utiliser pdfcrowd pour générer le PDF
+            var pdfcrowd = new Pdfcrowd("iftikharchetoui", "127002f1d2258c2853de08c1491859b0");
+            pdfcrowd.convertDocument(document.body.outerHTML);
+        });
+    </script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <div class="resume-wrapper">
         <section class="profile section-padding">
             <div class="container">
                 <div class="picture-resume-wrapper">
                     <div class="picture-resume">
-                        <span><img src="https://s3.amazonaws.com/uifaces/faces/twitter/jsa/128.jpg" alt="" /></span>
+                        <span><img src="1695679929234.jpg" alt="" /></span>
                         <svg version="1.1" viewBox="0 0 350 350">
 
                             <defs>
@@ -55,7 +453,11 @@
                     <div class="clearfix"></div>
                 </div>
                 <div class="name-wrapper">
-                    <h1>Iftikhar <br />Chetoui</h1><!-- YOUR NAME AND LAST NAME  -->
+                    <h1 style="margin-left: 50px;">Iftikhar <br />Chetoui</h1>
+                    <br>
+                        <!-- Ajouter un bouton pour déclencher la conversion en PDF -->
+    <a href="https://drive.google.com/file/d/15ZpxseeqBTmH0EQMxsbsEj7gd6JvN-90/view"><button id="download"
+        class="button">Télécharger le CV en PDF</button></a><!-- YOUR NAME AND LAST NAME  -->
                 </div>
                 <div class="clearfix"></div>
                 <div class="contact-info clearfix">
@@ -90,8 +492,8 @@
                 <div class="contact-social clearfix">
                     <ul class="list-titles">
                         <li>Twitter</li>
-                        <li>Dribbble</li>
-                        <li>Codepen</li>
+                        <li>facebiik</li>
+                        <li>instagram</li>
                     </ul>
                     <ul class="list-content">
                         <!-- REMEMBER TO PUT THE URL ON THE HREF TAG  -->
@@ -192,64 +594,60 @@
             </div>
 
 
-
-    </div>
-
-    <div class="company-wrapper clearfix">
-        <div class="experience-title">Groupe Chimique Tunisien</div> <!-- NAME OF THE COMPANY YOUWORK WITH  -->
-        <div class="time">01/2010-02/2010</div> <!-- THE TIME YOU WORK WITH THE COMPANY  -->
-    </div>
-
-    <div class="job-wrapper clearfix">
-        <div class="experience-title">Stagiaire Ouvrier [production]</div> <!-- JOB TITLE  -->
-        <div class="company-description">
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a elit facilisis,
-                adipiscing leo in, dignissim magna.</p> <!-- JOB DESCRIPTION  -->
-        </div>
+        </section>
     </div>
 
 
 
-    </div>
+
     <!--Skill experience-->
+    <section class="experience section-padding" style="margin-left: 582px;">
+        <div class="section-wrapper clearfix">
+            <h3 class="section-title">Skills</h3> <!-- YOUR SET OF SKILLS  -->
+            <ul>
+                <li class="skill-percentage">Developpemnt tools</li>
+                <li class="skill-percentage">Outils de CI/CD </li>
+                <li class="skill-percentage">Automatisation</li>
+                <li class="skill-percentage">Containerization et Orchestration</li>
+                <li class="skill-percentage">Monitoring et Logging</li>
+                <li class="skill-percentage">Sécurité</li>
+                <li class="skill-percentage">Collaboration et Communication</li>
 
-    <div class="section-wrapper clearfix">
-        <h3 class="section-title">Skills</h3> <!-- YOUR SET OF SKILLS  -->
-        <ul>
-            <li class="skill-percentage">HTML / HTML5</li>
-            <li class="skill-percentage">CSS / CSS3 </li>
-            <li class="skill-percentage">Javascript</li>
-            <li class="skill-percentage">Java</li>
-            <li class="skill-percentage">Docker</li>
-            <li class="skill-percentage">Ansible</li>
-            <li class="skill-percentage">Jenkins</li>
-            <li class="skill-percentage">git</li>
-            <li class="skill-percentage">Terraform</li>
-            <li class="skill-percentage">prometheus</li>
-            <li class="skill-percentage">Grafana</li>
-            <li class="skill-percentage">portainer</li>
-            <li class="skill-percentage">kubernet</li>
-            <li class="skill-percentage">minikube</li>
-            
 
-        </ul>
 
-    </div>
+            </ul>
 
-    <div class="section-wrapper clearfix">
-        <h3 class="section-title">Hobbies</h3> <!-- DESCRIPTION OF YOUR HOBBIES -->
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a elit facilisis, adipiscing leo
-            in, dignissim magna.</p>
+        </div>
+        <!--Language-->
+        <div class="section-wrapper clearfix" style="margin-left: 5px;">
+            <h3 class="section-title">Language</h3>
+            <ul>
+                <li>Git</li>
+                <li>Shell scripting (Bash)</li>
+                <li>Node.js
+                </li>
+                <li>PHP</li>
+                <li>Java</li>
+                <li>Python</li>
+                <li>C#
+                </li>
+                <li>HTML/CSS
+                </li>
+                <li>JavaScript</li>
+                <li>yml
+                </li>
+            </ul>
 
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce a elit facilisis, adipiscing leo
-            in, dignissim magna.</p>
-    </div>
-
-    </div>
+        </div>
     </section>
 
-    <div class="clearfix"></div>
-    </div>
+
+
+
+
+
+
 </body>
+
 
 </html>
